@@ -1,0 +1,74 @@
+{{monitoring}}
+<div class="panel panel-default">
+	<div class="panel-heading">
+	<h1>Ticket Rising</h1>
+	</div>
+
+	<div class="panel-body">
+		<alert ng-show="showAlert" type="{{alert.status}}" close="alert_1_hide = true" ng-show="alert_1_hide == null">
+			{{alert.message}}
+		</alert>
+
+		<div class="row">
+			<div class="col-md-6">
+
+				<div class="form-group">
+					<label for="field-1" class="control-label">WorkOrder category</label>
+
+					<input type="text" name="workordercategory" ng-model="monitoring.workordercategory" class="form-control" id="field-1" placeholder="category">
+				</div>
+
+			</div>
+			<div class="col-md-6">
+
+				<div class="form-group">
+					<label for="field-2" class="control-label">Subject</label>
+
+					<input type="text" name="subject" ng-model="monitoring.subject" class="form-control" id="field-2" placeholder="Doe">
+				</div>
+
+			</div>
+		</div>
+
+
+
+		<div class="row">
+			<div class="col-md-6">
+
+				<div class="form-group">
+					<label for="field-6" class="control-label">Mobile</label>
+
+					<input type="text" name="mobile" ng-model="monitoring.mobile" class="form-control" id="field-6" placeholder="Mobile">
+				</div>
+      </div>
+
+
+			<div class="col-md-6">
+
+				<div class="form-group">
+					<label for="field-7" class="control-label">Email</label>
+
+					<input type="text" name="email" ng-model="monitoring.email" class="form-control" id="field-7" placeholder="Email">
+				</div>
+
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-12">
+
+				<div class="form-group">
+					<label for="field-7" class="control-label">Issue</label>
+					<textarea name="issue" id="inputAddress" class="form-control" rows="3" ng-model="monitoring.issue"></textarea>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="pull-right-sm">
+			<button type="button" class="btn btn-block btn-secondary" ng-click="createTenant(monitoring)">Submit</button>
+		</div>
+
+	</div>
+
+</div>

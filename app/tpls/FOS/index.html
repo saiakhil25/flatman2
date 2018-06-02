@@ -1,0 +1,77 @@
+<page-title
+	ng-if="layoutOptions.pageTitles"
+	title="FOS"
+	description="List of All Fos's">
+</page-title>
+
+<div class="row">
+	<div class="col-md-12">
+		<div class="action-buttons">
+			<a class="btn btn-success" ui-sref="app.fos-form" role="button">Add FOS</a>
+		</div>
+		<div ui-grid="gridOptions" ui-grid-pagination class="myGrid"></div>
+		<!-- <div class="panel panel-default">
+			<div class="panel-heading">
+				<div class="col-md-2 col-sm-4 pull-right-sm">
+					<div class="action-buttons">
+						<a class="btn btn-block btn-secondary" ui-sref="app.fos-form" role="button">Add FOS</a>
+					</div>
+				</div>
+			</div>
+
+			<div class="panel-body">
+
+				<p ng-hide="fosList.length > 0">
+					No records found.
+				</p>
+
+				<table class="table table-hover members-table middle-align" ng-show="fosList.length > 0">
+					<thead>
+						<tr>
+							<th>S.No</th>
+							<th>Name</th>
+							<th>Email</th>
+							<th>Mobile</th>
+							<th>Alternate No</th>
+							<th>Emergency No</th>
+							<th>Created At</th>
+							<th>Action</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="fos in fosList">
+							<th>{{$index + 1}}</th>
+							<td>
+								<a ui-sref="app.fos-view({fosId: fos._id})">
+									{{fos.firstName}} {{fos.lastName}}
+								</a>
+							</td>
+							<td>{{fos.email}}</td>
+							<td>{{fos.mobile}}</td>
+							<td>{{fos.alternateMobile}}</td>
+							<td>{{fos.emergencyMobile}}</td>
+							<td>{{fos.createdAt | date: 'dd-MM-yyyy'}}</td>
+							<td class="action-links">
+								<a ui-sref="app.fos-edit({fosId: fos._id})" class="primary">
+									<i class="linecons-pencil"></i>
+									Edit FOS
+								</a>
+
+								<a ui-sref="app.fos-view({fosId: fos._id})" class="edit">
+									<i class="linecons-eye"></i>
+									View FOS
+								</a>
+
+								<a class="delete">
+									<i class="linecons-trash"></i>
+									Delete
+								</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+
+			</div>
+		</div> -->
+	</div>
+</div>
