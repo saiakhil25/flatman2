@@ -1,9 +1,10 @@
+{{fos}}
 <ol class="breadcrumb">
 	<li>
 		<a href="#">Home</a>
 	</li>
 	<li>
-		<a ui-sref="app.fos">FOS</a>
+		<a ui-sref="app.fos">Assigned ticket</a>
 	</li>
 	<li class="active" ng-hide="isUpdate"><b>Create</b></li>
 	<li class="active" ng-show="isUpdate">Update / {{fos.firstName}}</li>
@@ -16,8 +17,8 @@
 			<div class="row">
 				<div class="col-md-2 col-sm-4 pull-right-sm">
 					<div class="action-buttons">
-						<button ng-click="updateFOS()" type="button" class="btn btn-block btn-secondary">Save Changes</button>
-						<button ng-click="openPasswordChangeModal('password-update-modal', 'lg');" type="button" class="btn btn-block btn-gray">Change Password</button>
+						<button ng-click="updateFOS()" type="button" class="btn btn-block btn-secondary">Assign</button>
+						<!-- <button ng-click="openPasswordChangeModal('password-update-modal', 'lg');" type="button" class="btn btn-block btn-gray">Change Password</button> -->
 					</div>
 				</div>
 				<div class="col-md-10 col-sm-8">
@@ -29,7 +30,7 @@
 					</div>
 					<div class="user-name">
 						<a href="">{{fos.firstName}} {{fos.lastName}}</a>
-						<span>Health Coach</span>
+						<!-- <span>Health Coach</span> -->
 					</div>
 				</div>
 			</div>
@@ -43,35 +44,61 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="form-group">
-					<label for="field-1" class="control-label">First Name</label>
-					<input type="text" name="first_name" ng-model="fos.firstName" class="form-control" id="field-1" placeholder="John">
+					<label for="field-1" class="control-label">workordercategory</label>
+					<select name="" id="field-8" class="form-control" ng-model="fos.specializationId">
+						<option value="">Select category</option>
+						<option ng-repeat="specialization in specializations" value="{{specialization._id}}">{{specialization.specialization}}</option>
+					</select>
+					<!-- <input type="text" name="workordercategory" ng-model="fos.workordercategory"
+					class="form-control" id="field-1" placeholder="workordercategory"> -->
+                <!-- <select name="workordercategory" class="form-control list-box" ng-model="fos.workordercategory">
+                    <option value="electrition" selected="selected">electrition</option>
+                    <option value="plumber">plumber</option>
+                    <option value="carpenter">carpenter</option>
+                    <option value="otherService">otherService</option>
+                </select> -->
+
 				</div>
 			</div>
 			<div class="col-md-6">
 				<div class="form-group">
-					<label for="field-2" class="control-label">Last Name</label>
-					<input type="text" name="last_name" ng-model="fos.lastName" class="form-control" id="field-2" placeholder="Doe">
+					<label for="field-2" class="control-label">Subject</label>
+					<input type="text" name="subject" ng-model="fos.subject" class="form-control"
+					id="field-2" placeholder="subject">
 				</div>
 			</div>
+			<!-- <div class="row">
+				<div class="col-md-12">
+					<div class="form-group">
+						<label for="field-8" class="control-label">category</label>
+						<select name="" id="field-8" class="form-control" ng-model="fos.specializationId">
+							<option value="">Select category</option>
+							<option ng-repeat="specialization in specializations" value="{{specialization._id}}">{{specialization.specialization}}</option>
+						</select>
+					</div>
+				</div>
+			</div> -->
+
 		</div>
 
+<!--
 		<div class="row">
 			<div class="col-md-12" ng-hide="isUpdate">
 				<div class="form-group">
 					<label for="fos-avatar" class="control-label">FOS Image</label>
 					<input type="file" name="avatar" file-model="fos.avatar" class="form-control" id="fos-avatar">
 				</div>
-			</div>
-			<div class="col-md-10" ng-show="isUpdate">
+			</div> -->
+			<!-- <div class="col-md-10" ng-show="isUpdate">
 				<div class="form-group">
 					<label for="fos-avatar" class="control-label">FOS Image</label>
 					<input type="file" name="avatar" file-model="fos.avatar" class="form-control" id="fos-avatar">
 				</div>
-			</div>
-			<div class="col-md-2" ng-show="isUpdate">
+			</div> -->
+			<!-- <div class="col-md-2" ng-show="isUpdate">
 				<button type="button" ng-click="uploadImage(fos, 'fos')" class="btn btn-primary">Upload</button>
 			</div>
-		</div>
+		</div> -->
 
 		<div class="row">
 			<div class="col-md-4">
@@ -82,20 +109,20 @@
 			</div>
 			<div class="col-md-4">
 				<div class="form-group">
-					<label for="field-16" class="control-label">Alternate Mobile</label>
-					<input type="text" name="altermobile" ng-model="fos.alternateMobile" class="form-control" id="field-16" placeholder="Alternate Mobile">
+					<label for="field-16" class="control-label">flatno</label>
+					<input type="text" name="flatno" ng-model="fos.flatno" class="form-control" id="field-16" placeholder="flatno">
 				</div>
 			</div>
-			<div class="col-md-4">
+			<!-- <div class="col-md-4">
 				<div class="form-group">
 					<label for="field-06" class="control-label">Emergency Mobile</label>
 					<input type="text" name="emermobile" ng-model="fos.emergencyMobile" class="form-control" id="field-06" placeholder="Emergency Mobile">
 				</div>
-			</div>
-		</div>
+			</div> -->
 
-		<div class="row">
-			<div class="col-md-12">
+
+
+			<div class="col-md-4">
 				<div class="form-group">
 					<label for="field-7" class="control-label">Email</label>
 					<input type="text" name="email" ng-model="fos.email" class="form-control" id="field-7" placeholder="Email">
@@ -106,13 +133,13 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="form-group">
-					<label for="field-11" class="control-label">Address</label>
-					<textarea name="ofzaddress" id="field-11" class="form-control" rows="3" ng-model="fos.address"></textarea>
+					<label for="field-11" class="control-label">issues</label>
+					<textarea name="issues" id="field-11" class="form-control" rows="3" ng-model="fos.issues"></textarea>
 				</div>
 			</div>
 		</div>
 
-		<div class="row" ng-hide="isUpdate">
+		<!-- <div class="row" ng-hide="isUpdate">
 			<div class="col-md-6">
 				<div class="form-group">
 					<label for="field-4" class="control-label">Password</label>
@@ -125,10 +152,10 @@
 					<input type="password" ng-model="fos.confirmPassword" class="form-control" id="field-5" placeholder="Confirm password">
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 		<div class="pull-right-sm" ng-hide="isUpdate">
-			<button type="button" class="btn btn-block btn-secondary" ng-click="createFOS()">Create</button>
+			<button type="button" class="btn btn-block btn-secondary" ng-click="createFOS(fos)">Create</button>
 		</div>
 
 	</div>
@@ -136,7 +163,7 @@
 </div>
 
 <script type="text/ng-template" id="password-update-modal">
-	<div class="modal-header">
+	<!-- <div class="modal-header">
 		<button type="button" class="close" ng-click="currentModal.close();" aria-hidden="true">&times;</button>
 		<h4 class="modal-title">Update Password</h4>
 	</div>
@@ -169,7 +196,7 @@
 			</div>
 		</div>
 
-	</div>
+	</div> -->
 
 	<div class="modal-footer">
 		<button type="button" class="btn btn-white" ng-click="currentModal.close();">

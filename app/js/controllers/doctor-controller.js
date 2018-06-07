@@ -26,11 +26,12 @@ app.controller('DoctorController', function ($scope, $http, $stateParams, $locat
 				field: 'name',
 				cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row) + 1}}</div>'
 			},
-			{field: 'getFullName()', displayName: 'Name'},
+			{field: 'workordercategory'},
+			{field: 'subject'},
 			{field: 'email'},
-			{field: 'mobile', displayName: 'Mobile 1'},
-			{field: 'alternateMobile', displayName: 'Mobile 2'},
-			{field: 'specialization'},
+			{field: 'mobile', displayName: 'Mobile'},
+			{field: 'flatno'},
+			//{field: 'specialization'},
 			{
 				field: 'createdAt',
 				enableSorting: true,
@@ -55,13 +56,15 @@ app.controller('DoctorController', function ($scope, $http, $stateParams, $locat
 			$scope.doctors = response.data;
 			$scope.gridOptions.data = response.data;
 			angular.forEach($scope.gridOptions.data, function(row){
-				row.getFullName = function(){
-					return this.basicInfo.firstName + ' ' + this.basicInfo.lastName;
-				},
+				// row.getFullName = function(){
+				// 	return this.basicInfo.firstName + ' ' + this.basicInfo.lastName;
+				// },
+				row.workordercategory = row.basicInfo.workordercategory,
+				row.subject = row.basicInfo.workordercategory,
 				row.email = row.basicInfo.email,
 				row.mobile = row.basicInfo.mobile,
-				row.alternateMobile = row.basicInfo.alternateMobile,
-				row.specialization = row.specializationInfo.specialization,
+				row.flatno = row.basicInfo.flatno,
+			//	row.specialization = row.specializationInfo.specialization,
 				row.createdAt = row.basicInfo.createdAt
 			});
 		});
@@ -80,7 +83,7 @@ app.controller('DoctorController', function ($scope, $http, $stateParams, $locat
 
 	refresh();
 
-	$scope.createDoctor = function() {
+	$scope.createDoctor = function(doctors) {
 		var fd = new FormData();
 		for (var key in $scope.doctor) {
 			fd.append(key, $scope.doctor[key])
@@ -102,7 +105,7 @@ app.controller('DoctorController', function ($scope, $http, $stateParams, $locat
 		});
 	}
 
-	$scope.updateDoctor = function() {
+	$scope.updateDoctor = function(doctors) {
 		$http.post('/api/doctor/update', $scope.doctor).success(function(response) {
 			if(response.success) {
 				$scope.showAlert = true;

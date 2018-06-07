@@ -85,10 +85,16 @@
 			</div>
 
 			<div class="row">
-				<div class="col-md-12">
+				<div class="col-md-6">
 					<div class="form-group">
 						<label for="cus-loc">Customer Location</label>
 						<input name="location" type="text" class="form-control" id="cus-loc" ng-model="customer.location">
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12">
+					<div class="form-group">
+						<label for="field-6">workordercategory</label>
+						<input name="workordercategory" type="text" class="form-control" id="field-6" ng-model="customer.workordercategory">
 					</div>
 				</div>
 			</div>
@@ -121,16 +127,14 @@
 			</div>
 
 			<div class="row" ng-hide="isUpdate">
-				<div class="col-md-12">
+				<div class="col-md-6">
 					<div class="form-group">
 						<label for="password">Password</label>
 						<input name="pwd" type="text" class="form-control" id="password" ng-model="customer.password">
 					</div>
 				</div>
-			</div>
 
-			<div class="row" ng-hide="isUpdate">
-				<div class="col-md-12">
+				<div class="col-md-6">
 					<div class="form-group">
 						<label for="conf_pwd">Confirm Password</label>
 						<input name="confirm_pwd" type="text" class="form-control" id="conf_pwd" ng-model="customer.confirmPassword">

@@ -81,6 +81,7 @@ module.exports = function(router, passport, upload) {
 						newUser.password = crypto.encrypt(req.body.password);
 						newUser.firstName = req.body.firstName;
 						newUser.lastName = req.body.lastName;
+						newUser.workordercategory = req.body.workordercategory;
 						newUser.mobile = req.body.mobile;
 						newUser.avatar = req.body.avatar;
 						newUser.userRole = 2;
@@ -121,6 +122,7 @@ module.exports = function(router, passport, upload) {
 			location: req.body.location,
 			mobile: req.body.mobile,
 			email: req.body.email,
+			workordercategory: req.body.workordercategory,
 			serviceLocation: req.body.serviceLocation
 		};
 		Customer.findByIdAndUpdate(req.body._id, {$set: customerInfoObj}, function(err) {
@@ -141,6 +143,7 @@ module.exports = function(router, passport, upload) {
 		newCustomer.location 		= customer.location
 		newCustomer.mobile 			= customer.mobile
 		newCustomer.email 			= customer.email
+		newCustomer.workordercategory =customer.workordercategory
 		newCustomer.serviceLocation = customer.serviceLocation
 		newCustomer.status 			= 1
 		newCustomer.isVerified 		= 0

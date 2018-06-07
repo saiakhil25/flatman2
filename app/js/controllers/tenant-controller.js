@@ -1,10 +1,10 @@
-app.controller('MonitorController', function ($rootScope, $scope, $http, $state, $stateParams, $rootScope, $modal, $sce) {
+app.controller('TenantController', function ($rootScope, $scope, $http, $state, $stateParams, $rootScope, $modal, $sce) {
 
 	$scope.showAssignBtn = false;
 	$scope.showAnalysisBtn = false;
 
 	var actionHtmlContent = '<div class="ui-grid-cell-contents">'
-							+ '<a ui-sref="app.monitor-view({monitorId: row.entity._id })" class="edit">'
+							+ '<a ui-sref="app.tenant-view({tenantId: row.entity._id })" class="edit">'
 							+ '<i class="linecons-eye"></i>'
 							+ 'View'
 							+ '</a>&nbsp'
@@ -26,44 +26,45 @@ app.controller('MonitorController', function ($rootScope, $scope, $http, $state,
 				field: 'name',
 				cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row) + 1}}</div>'
 			},
-			{field: 'getFullName()', displayName: 'Name'},
-			{ field: 'flatno'},
+		//	{field: 'getFullName()', displayName: 'Name'},
+		//	{ field: 'flatno'},
+		{ field: 'workordercategory'},
+		{ field: 'subject'},
 			{field: 'email'},
 			{field: 'mobile'},
+
 
 			//{
 				//field: 'flatno'
 				//enableSorting: true,
 				//cellFilter: 'date:\'dd-MM-yyyy\''
 		//	},
-			// 	{
-			// 	name:  'Action',
-			// 	field: 'name',
-			// 	cellTemplate: actionHtmlContent
-			// },
+			{
+				name:  'Action',
+				field: 'name',
+				cellTemplate: actionHtmlContent
+			},
 		],
 		onRegisterApi: function (gridApi) {
 			$scope.grid1Api = gridApi;
 		}
 	};
-   $scope.getTicket = function(){
-		 alert('are you sure want to add ticket');
-	 }
+
 	var refresh = function() {
-		// GET locations
-		$http.get('/api/locations').then(function(response) {
-			$scope.locations = response.data.data;
-		});
+		// // GET locations
+		// $http.get('/api/locations').then(function(response) {
+		// 	$scope.locations = response.data.data;
+		// });
 
 		// GET patients
 		if($rootScope.user.userRole == 2) {
-			$http.get('/api/patient/' + $rootScope.user.customerId).success(function(response) {
-				$scope.patients = response.data.data;
+			$http.get('/api/tenant/' + $rootScope.user.customerId).success(function(response) {
+				$scope.tenant = response.data.data;
 				$scope.gridOptions.data = response.data;
 				angular.forEach($scope.gridOptions.data,function(row){
-					row.getFullName = function(){
-						return this.firstName + ' ' + this.lastName;
-					}
+					// row.getFullName = function(){
+					// 	return this.firstName + ' ' + this.lastName;
+					// }
 				});
 			});
 		}
@@ -144,20 +145,20 @@ app.controller('MonitorController', function ($rootScope, $scope, $http, $state,
 
 	$state.reload();
 
-	$scope.createTenant = function(monitoring) {
-		$scope.monitoring.customerId = $rootScope.user.customerId;
+	$scope.createTenant = function(tenant) {
+		$scope.tenant.customerId = $rootScope.user.customerId;
 		var fd = new FormData();
-		for (var key in $scope.monitoring) {
-			fd.append(key, $scope.monitoring[key])
+		for (var key in $scope.tenant) {
+			fd.append(key, $scope.tenant[key])
 		}
-		$http.post('/api/monitoring/create', fd, {
+		$http.post('/api/tenant/create', fd, {
 			transformRequest: angular.indentity,
 			headers: { 'Content-Type': undefined }
 		}).then(function(response) {
 			refresh();
 			$scope.showAlert = true;
 			$scope.alert = {message: response.data.message, status: 'success'};
-			$scope.monitoring = {};
+			$scope.patient = {};
 		})
 	}
 
@@ -268,6 +269,7 @@ app.controller('MonitorController', function ($rootScope, $scope, $http, $state,
 			controller: function($scope, $http, $modalInstance, $state) {
 				$scope.showAlert = false;
 				$scope.assignObj = {};
+
 				if(isDoc) {
 					$scope.assignName = "Doctor";
 					$scope.isDoc = true;

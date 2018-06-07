@@ -4,7 +4,7 @@ var patientSchema = mongoose.Schema({
 	firstName		: 	{ type: String },
 	lastName		: 	{ type: String },
 	avatar			: 	{ type: String },
-	age				: 	{ type: String },
+	//age				: 	{ type: String },
 	locationId		: 	{ type: String },
 	email			: 	{ type: String },
 	mobile			: 	{ type: String },

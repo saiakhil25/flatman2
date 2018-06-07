@@ -49,6 +49,7 @@ app.controller('CustomerController', function ($scope, $http, $state, $statePara
 			{field: 'email'},
 			{field: 'mobile'},
 			{field: 'location'},
+			{field: 'workordercategory'},
 		 //{
 			//	field: 'createdAt',
 				//enableSorting: true,

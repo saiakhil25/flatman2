@@ -25,7 +25,7 @@ app.controller('SpecializationController', function ($scope, $rootScope, $modal,
 				field: 'name',
 				cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row) + 1}}</div>'
 			},
-			{field: 'specialization'},
+			{field: 'specialization',displayName :'workordercategory'},
 			{
 				name:  'Action',
 				field: 'name',

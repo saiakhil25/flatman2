@@ -91,23 +91,25 @@ angular.module('xenon.services', []).
 
 			if($rootScope.user.userRole == '0' || $rootScope.user.userRole == '1') {
 				var vendors 		= this.addItem('Vendors', 		'/app/customers', 			'fa-users');
-				//var users 			= this.addItem('Users', 			'/app/doctors', 			'fa-stethoscope');
-				//var fos 			= this.addItem('FOS', 				'/app/fos', 				'fa-medkit');
+
 				var secretary			= this.addItem('secretary', 			'/app/users', 				'fa-building-o');
+				var fos 			= this.addItem('Raised tickets', 				'/app/fos', 				'linecons-paper-plane');
+				var users 			= this.addItem('Assigning tickets', 		'/app/doctor/create', 			'fa-check-square-o');
 				//var serviceLocation = this.addItem('Service Location', 	'/app/service-locations', 	'fa-location-arrow');
-				//var specialization 	= this.addItem('Specialization', 	'/app/specialization', 		'fa-medkit');
+				var specialization 	= this.addItem('workordercategory', 	'/app/specialization', 		'fa-medkit');
 				//var chart		 	= this.addItem('Charts', 			'/app/chart-list', 			'fa-pie-chart');
 			}
 
 			if($rootScope.user.userRole == '3') {
-				var Ticketrising     = this.addItem('Ticket Rising',			'/app/tenant-dashboard',		'fa-paper-plane');
-				//var tenantMonitoring     		= this.addItem('Monitoring tickets',			'/app/ticket-monitoring',				'fa-inbox');
+				var Ticketrising     = this.addItem('Ticket Rising',			'/app/fos/create',		'fa-paper-plane');
+				var tenantMonitoring     	= this.addItem('Monitoring tickets',	'/app/fos',				'fa-inbox');
 				//var fosInteraction      = this.addItem('FOS Interaction',	'/app/fos-interaction',		'fa-hospital-o');
 				//var doctorAnalysis      = this.addItem('Doctor Analysis',	'/app/doctor-analysis',		'fa-stethoscope');
 			//	var medications      	= this.addItem('Medications',		'/app/medications',			'fa-plus-square');
 			}
 			if($rootScope.user.userRole == '2') {
-				var Vendor     = this.addItem('Assigned ticket',			'/app/assignedtickets',		'fa-paper-plane');
+			//	var Vendor     = this.addItem('Assigned ticket',			'/app/assignedtickets',		'fa-paper-plane');
+			   var doctor		= this.addItem('Assigned ticket', 		'/app/doctors', 			'fa-paper-plane');
 				//var tenantMonitoring    	= this.addItem('Monitoring tickets',			'/app/',				'fa-inbox');
 				//var fosInteraction      = this.addItem('FOS Interaction',	'/app/fos-interaction',		'fa-hospital-o');
 				//var doctorAnalysis      = this.addItem('Doctor Analysis',	'/app/doctor-analysis',		'fa-stethoscope');

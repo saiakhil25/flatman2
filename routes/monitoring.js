@@ -1,74 +1,74 @@
 var async = require('async');
-var Monitor = require('../models/monitoring');
+var Tenant = require('../models/tenant');
 var User = require('../models/user');
 var Location = require('../models/location');
 var crypto 	= require('../config/crypto');
 
 module.exports = function(router, upload) {
 
-	router.get('/patients/all', function(req, res) {
-		Monitor.find({}, function(err, patients) {
+	router.get('/tenants/all', function(req, res) {
+		Tenant.find({}, function(err, tenants) {
 			if(err)
 				res.json({success: false, error: err.stack});
-			res.json({success: true, data: patients});
+			res.json({success: true, data: tenants});
 		});
 	});
 
 	// GET patient by customerId
-	router.get('/patient/:customerId', function(req, res) {
-		Patient.find({customerId: req.params.customerId}, function(err, patient) {
+	router.get('/Tenant/:customerId', function(req, res) {
+		Tenant.find({customerId: req.params.customerId}, function(err, Tenant) {
 			if(err)
 				res.json({success: false, error: err.stack});
-			res.json({success: true, data: patient});
+			res.json({success: true, data: tenant});
 		});
 	});
 
-	router.get('/patient/get-patient-by-id/:patientId', function(req, res) {
-		var patientInfoObject = {};
+	router.get('/tenant/get-tenant-by-id/:tenantId', function(req, res) {
+		var tenantInfoObject = {};
 		async.waterfall([
 			function(callback) {
-				Patient.findOne({_id: req.params.patientId}, function(err, patient) {
+				Tenant.findOne({_id: req.params.tenantId}, function(err, tenant) {
 					if(err){
 						callback(err);
 					}
-					else if(patient == null) {
+					else if(tenant == null) {
 						callback(null, undefined);
 					}
 					else {
-						patientInfoObject["basicInfo"] = patient;
-						callback(null, patient);
+						tenantInfoObject["basicInfo"] = tenant;
+						callback(null, tenant);
 					}
 				});
 			},
-			function(patient, callback) {
-				if(patient !== undefined) {
-					Location.findOne({_id: patient.locationId}, function(err, location) {
+			function(tenant, callback) {
+				if(tenant !== undefined) {
+					Location.findOne({_id: tenant.locationId}, function(err, location) {
 						if(err) {
 							callback(err);
 						}
 						else {
-							patientInfoObject["locationInfo"] = location;
-							callback(null, patientInfoObject);
+							tenantInfoObject["locationInfo"] = location;
+							callback(null, tenantInfoObject);
 						}
 					})
 				}
 				else {
-					callback(null, patientInfoObject);
+					callback(null, tenantInfoObject);
 				}
 			}
-		], function(err, patientInfoObject) {
+		], function(err, tenantInfoObject) {
 			if(err) {
 				res.json({success: false, error: err.stack});
 			}
 			else {
-				res.json({success: true, data: patientInfoObject});
+				res.json({success: true, data: tenantInfoObject});
 			}
 		})
 
 	})
 
 	//var newUpload = upload.single('avatar');
-	router.post('/monitoring/create', function(req, res) {
+	router.post('/tenant/create', function(req, res) {
 		//newUpload(req, res, function(error) {
 			// if(error) {
 			// 	res.json({success: false, message: "File too large, maximum size 1 MB"});
@@ -100,7 +100,7 @@ module.exports = function(router, upload) {
 							if(err) {
 								res.json({success: false, message: "Error in creating user", error: err.stack})
 							} else {
-								addPatient(req.body, function(response) {
+								addTenant(req.body, function(response) {
 									if(response.success) {
 										res.json({success: true, message: "New User created."})
 									}
@@ -123,8 +123,8 @@ module.exports = function(router, upload) {
 	//	})
 	});
 
-	router.post('/patient/update', function(req, res) {
-		var patientInfoObj = {
+	router.post('/tenant/update', function(req, res) {
+		var tenantInfoObj = {
 			//firstName: req.body.firstName,
 			//lastName: req.body.lastName,
 			//locationId: req.body.locationId,
@@ -137,7 +137,7 @@ module.exports = function(router, upload) {
 			//flatno : req.body.flatno,
 			//address: req.body.address
 		};
-		Patient.findByIdAndUpdate(req.body._id, {$set: patientInfoObj}, function(err) {
+		Tenant.findByIdAndUpdate(req.body._id, {$set: tenantInfoObj}, function(err) {
 			if(err) {
 				res.json({success: false, error: err.stack});
 			}
@@ -147,23 +147,23 @@ module.exports = function(router, upload) {
 		});
 	})
 
-	function addPatient(patient, callback) {
-		var newPatient = new Patient();
+	function addTenant(tenant, callback) {
+		var newTenant = new Tenant();
 		//newPatient.firstName = patient.firstName;
 		//newPatient.lastName = patient.lastName;
 		//newPatient.avatar = patient.avatar;
-		newPatient.workordercategory = patient.workordercategory;
-		newPatient.subject = patient.subject;
-		newPatient.mobile = patient.mobile;
-		newPatient.email = patient.email;
-		newPatient.issue = patient.issue;
+		newTenant.workordercategory = tenant.workordercategory;
+		newTenant.subject = tenant.subject;
+		newTenant.mobile = tenant.mobile;
+		newTenant.email = tenant.email;
+		newTenant.issue = tenant.issue;
 		//newPatient.flatno = patient.flatno;
 		//newPatient.locationId = patient.locationId;
 	//	newPatient.customerId = patient.customerId;
 	//	newPatient.address = patient.address;
-		newPatient.status = 1;
-		newPatient.isVerified = 0;
-		newPatient.save(function(err) {
+		newTenant.status = 1;
+		newTenant.isVerified = 0;
+		newTenant.save(function(err) {
 			if(err)
 				callback({success: false, error: err.stack});
 			callback({success: true, message: "New User created."});

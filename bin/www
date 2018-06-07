@@ -5,7 +5,7 @@
  */
 
 var app = require('../server');
-var debug = require('debug')('swasmos:server');
+var debug = require('debug')('flatman:server');
 var http = require('http');
 
 /**

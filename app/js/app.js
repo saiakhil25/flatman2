@@ -132,7 +132,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 					]);
 				},
 				permission: function(AuthService, $state) {
-                    return AuthService.permissionCheck([roles.superAdmin, roles.admin]);
+                    return AuthService.permissionCheck([roles.superAdmin, roles.admin,roles.customer]);
                 }
 			}
 		}).
@@ -144,7 +144,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 			controller: 'CustomerController',
 			resolve: {
 				permission: function(AuthService, $state) {
-                    return AuthService.permissionCheck([roles.superAdmin, roles.admin]);
+                    return AuthService.permissionCheck([roles.superAdmin, roles.admin,roles.customer]);
                 }
 			}
 		}).
@@ -156,7 +156,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 			controller: 'CustomerController',
 			resolve: {
 				permission: function(AuthService, $state) {
-                    return AuthService.permissionCheck([roles.superAdmin, roles.admin]);
+                    return AuthService.permissionCheck([roles.superAdmin, roles.admin,roles.customer]);
                 }
 			}
 		}).
@@ -168,7 +168,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 			controller: 'CustomerController',
 			resolve: {
 				permission: function(AuthService, $state) {
-                    return AuthService.permissionCheck([roles.superAdmin, roles.admin]);
+                    return AuthService.permissionCheck([roles.superAdmin, roles.admin,roles.customer]);
                 }
 			}
 		}).
@@ -180,7 +180,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 			controller: 'CustomerController',
 			resolve: {
 				permission: function(AuthService, $state) {
-                    return AuthService.permissionCheck([roles.superAdmin, roles.admin]);
+                    return AuthService.permissionCheck([roles.superAdmin, roles.admin,roles.customer]);
                 }
 			}
 		}).
@@ -192,7 +192,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 			controller: 'CustomerController',
 			resolve: {
 				permission: function(AuthService, $state) {
-                    return AuthService.permissionCheck([roles.superAdmin, roles.admin]);
+                    return AuthService.permissionCheck([roles.superAdmin, roles.admin,roles.customer]);
                 }
 			}
 		}).
@@ -204,10 +204,40 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 			controller: 'AnalysisController',
 			resolve: {
 				permission: function(AuthService, $state) {
-                    return AuthService.permissionCheck([roles.superAdmin, roles.admin]);
+                    return AuthService.permissionCheck([roles.superAdmin, roles.admin,roles.customer]);
                 }
 			}
 		}).
+
+		// monitor index
+		state('app.monitors', {
+			url: '/monitors',
+			templateUrl: appHelper.templatePath('monitor/monitoring'),
+			controller: 'TenantController',
+			resolve: {
+				deps: function($ocLazyLoad){
+					return $ocLazyLoad.load([
+						ASSETS.tables.rwd,
+					]);
+				},
+				permission: function(AuthService, $state) {
+                    return AuthService.permissionCheck([roles.superAdmin, roles.admin,roles.patient, roles.customer, roles.doctor]);
+                }
+			}
+		}).
+
+		// tenant rising
+		state('app.tenant-create', {
+			url: '/tenants',
+			templateUrl: appHelper.templatePath('tenant/form'),
+			controller: 'TenantController',
+			resolve: {
+				permission: function(AuthService, $state) {
+                    return AuthService.permissionCheck([roles.superAdmin, roles.admin, roles.customer,roles.patient]);
+                }
+			}
+		}).
+
 
 
 		// Patient index
@@ -222,7 +252,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 					]);
 				},
 				permission: function(AuthService, $state) {
-                    return AuthService.permissionCheck([roles.superAdmin, roles.admin, roles.customer, roles.doctor, roles.fos]);
+                    return AuthService.permissionCheck([roles.superAdmin, roles.admin,roles.patient, roles.customer, roles.doctor]);
                 }
 			}
 		}).
@@ -275,7 +305,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 					]);
 				},
 				permission: function(AuthService, $state) {
-                    return AuthService.permissionCheck([roles.superAdmin, roles.admin]);
+                    return AuthService.permissionCheck([roles.superAdmin, roles.admin,roles.customer]);
                 }
 			}
 		}).
@@ -299,7 +329,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 			controller: 'DoctorController',
 			resolve: {
 				permission: function(AuthService, $state) {
-                    return AuthService.permissionCheck([roles.superAdmin, roles.admin]);
+                    return AuthService.permissionCheck([roles.superAdmin, roles.admin, roles.customer]);
                 }
 			}
 		}).
@@ -311,7 +341,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 			controller: 'DoctorController',
 			resolve: {
 				permission: function(AuthService, $state) {
-                    return AuthService.permissionCheck([roles.superAdmin, roles.admin]);
+                    return AuthService.permissionCheck([roles.superAdmin, roles.admin,roles.customer]);
                 }
 			}
 		}).
@@ -323,12 +353,12 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 			controller: 'MonitorController',
 			resolve: {
 				permission: function(AuthService, $state) {
-                  //  return AuthService.permissionCheck([roles.superAdmin, roles.admin]);
+                  return AuthService.permissionCheck([roles.superAdmin, roles.admin]);
                 }
 			}
 		}).
 
-		// //monitor edit
+		//monitor edit
 		// state('app.monitor-edit',{
 		// 	url: '/monitoring/update/:monitorId',
 		// 	templateUrl: appHelper.templatePath('monitor/form'),
@@ -352,7 +382,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 					]);
 				},
 				permission: function(AuthService, $state) {
-                    return AuthService.permissionCheck([roles.superAdmin, roles.admin]);
+                    return AuthService.permissionCheck([roles.superAdmin, roles.admin,roles.patient]);
                 }
 			}
 		}).
@@ -364,7 +394,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 			controller: 'FOSController',
 			resolve: {
 				permission: function(AuthService, $state) {
-                    return AuthService.permissionCheck([roles.superAdmin, roles.admin]);
+                    return AuthService.permissionCheck([roles.superAdmin, roles.admin,roles.patient]);
                 }
 			}
 		}).
@@ -376,7 +406,7 @@ app.config(function($stateProvider, $urlRouterProvider, $ocLazyLoadProvider, ASS
 			controller: 'FOSController',
 			resolve: {
 				permission: function(AuthService, $state) {
-                    return AuthService.permissionCheck([roles.superAdmin, roles.admin]);
+                    return AuthService.permissionCheck([roles.superAdmin, roles.admin,roles.patient]);
                 }
 			}
 		}).

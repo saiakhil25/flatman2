@@ -1,13 +1,13 @@
 <page-title
 	ng-if="layoutOptions.pageTitles"
-	title="Specialization"
-	description="List of All Locations">
+	title="workordercategory"
+	description="List of All categories">
 </page-title>
 
 
 <div class="row">
 	<div class="col-md-12">
-		<button ng-click="openModal('specialization-form-modal', 'lg', true, false, false);" class="btn btn-secondary">Add Specialization</button>
+		<button ng-click="openModal('specialization-form-modal', 'lg', true, false, false);" class="btn btn-secondary">Add categories</button>
 		<div ui-grid="gridOptions" ui-grid-pagination class="myGrid"></div>
 	</div>
 </div>
@@ -16,7 +16,7 @@
 <script type="text/ng-template" id="specialization-form-modal">
 	<div class="modal-header">
 		<button type="button" class="close" ng-click="currentModal.close();" aria-hidden="true">&times;</button>
-		<h4 class="modal-title">Specialization</h4>
+		<h4 class="modal-title">workordercategory</h4>
 	</div>
 
 	<div class="modal-body">
@@ -27,8 +27,8 @@
 
 			<div class="col-md-12">
 				<div class="form-group">
-					<label for="field-1" class="control-label">Location</label>
-					<input type="text" ng-model="specialization.specialization" class="form-control" id="field-1" placeholder="Eg: ENT Specialist">
+					<label for="field-1" class="control-label">workordercategory</label>
+					<input type="text" ng-model="specialization.specialization" class="form-control" id="field-1" placeholder="Eg: electrition">
 				</div>
 			</div>
 

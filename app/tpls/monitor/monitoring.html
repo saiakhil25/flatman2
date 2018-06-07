@@ -1,4 +1,3 @@
-{{ticket-monitoring}}
 <page-title
 	ng-if="layoutOptions.pageTitles"
 	title="Users"
@@ -9,9 +8,8 @@
 	<div class="col-md-12">
 		<div class="action-buttons">
 
-			<a class="btn btn-success" ui-sref="app.ticket-monitoring" role="button">Add Users</a>
+			<a class="btn btn-success" ui-sref="app.patient-create" role="button">Add Users</a>
 		</div>
-    	<a class="btn btn-success" ng-click="getTicket()" ui-sref="app.ticket-monitoring" role="button">Add Ticket</a>
 		<div ui-grid="gridOptions" ui-grid-pagination class="myGrid"></div>
 
 		<!-- <div class="panel panel-default">

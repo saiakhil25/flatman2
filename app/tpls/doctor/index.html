@@ -1,14 +1,14 @@
 <page-title
 	ng-if="layoutOptions.pageTitles"
-	title="Doctors"
-	description="List of All Doctors">
+	title="Assigned Tickets"
+	description="List of tasks assigned to vendors">
 </page-title>
 
 <div class="row">
 	<div class="col-md-12">
-		<div class="action-buttons">
+	<!--	<div class="action-buttons">
 			<a class="btn btn-success" ui-sref="app.doctor-form" role="button">Add Doctor</a>
-		</div>
+		</div>-->
 		<div ui-grid="gridOptions" ui-grid-pagination class="myGrid"></div>
 		<!-- <div class="panel panel-default">
 			<div class="panel-heading">

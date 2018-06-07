@@ -2,6 +2,7 @@ var async = require('async');
 var FOS = require('../models/fos');
 var User = require('../models/user');
 var Location = require('../models/location');
+var Specialization = require('../models/specialization');
 var crypto = require('../config/crypto');
 
 module.exports = function(router, upload) {
@@ -29,6 +30,14 @@ module.exports = function(router, upload) {
 			        	callback(null, data);
 					}
 			    });
+			},
+			function(data, callback) {
+				Specialization.findById(data.basicInfo.specializationId, function(err, spec) {
+					if(err)
+						callback(err)
+					data["specialization"] = spec;
+					callback(null, data);
+				})
 			}
 		], function(err, data) {
 			if(err) {
@@ -47,7 +56,7 @@ module.exports = function(router, upload) {
 				res.json({success: false, message: "File too large, maximum size 1 MB"});
 			}
 			else {
-				req.body.avatar = req.file.path;
+			//	req.body.avatar = req.file.path;
 				User.findOne({email: req.body.email}, function(err, user) {
 					if(err) {
 						res.json({success: false, error: err.stack});
@@ -58,11 +67,12 @@ module.exports = function(router, upload) {
 					else {
 						var newUser = new User();
 						newUser.email = req.body.email;
-						newUser.password = crypto.encrypt(req.body.password);;
-						newUser.firstName = req.body.firstName;
-						newUser.lastName = req.body.lastName;
-						newUser.avatar = req.body.avatar;
+					//	newUser.password = crypto.encrypt(req.body.password);;
+						newUser.workordercategory = req.body.workordercategory;
+						newUser.subject = req.body.subject;
+					//	newUser.avatar = req.body.avatar;
 						newUser.mobile = req.body.mobile;
+						newUser.flatno = req.body.flatno;
 						newUser.userRole = 5;
 						newUser.status = 1;
 						newUser.save(function(err, user){
@@ -106,15 +116,15 @@ module.exports = function(router, upload) {
 
 	function addFOS(fos, callback) {
 		var newFOS = new FOS();
-		newFOS.firstName = fos.firstName
-		newFOS.lastName = fos.lastName
-		newFOS.avatar = fos.avatar
-		newFOS.address = fos.address
+		newFOS.workordercategory = fos.workordercategory
+		newFOS.subject = fos.subject
+	//	newFOS.avatar = fos.avatar
+		newFOS.issues = fos.issues
 		newFOS.mobile = fos.mobile
-		newFOS.alternateMobile = fos.alternateMobile
-		newFOS.emergencyMobile = fos.emergencyMobile
+		newFOS.flatno = fos.flatno
+		// newFOS.emergencyMobile = fos.emergencyMobile
 		newFOS.email = fos.email
-		newFOS.password = fos.password
+		//newFOS.password = fos.password
 		newFOS.status = 1
 		newFOS.save(function(err) {
 			if(err)

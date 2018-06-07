@@ -4,9 +4,10 @@ app.controller('FOSController', function ($scope, $http, $stateParams, $location
 	$scope.isUpdate = false;
 
 	var actionHtmlContent = '<div class="ui-grid-cell-contents">'
+
 							+ '<a ui-sref="app.fos-edit({fosId: row.entity._id })" class="edit">'
 							+ '<i class="linecons-pencil"></i>'
-							+ 'Edit'
+							+ 'Assign'
 							+ '</a>&nbsp'
 							+ '<a ui-sref="app.fos-view({fosId: row.entity._id })" class="edit">'
 							+ '<i class="linecons-eye"></i>'
@@ -26,11 +27,13 @@ app.controller('FOSController', function ($scope, $http, $stateParams, $location
 				field: 'name',
 				cellTemplate: '<div class="ui-grid-cell-contents">{{grid.renderContainers.body.visibleRowCache.indexOf(row) + 1}}</div>'
 			},
-			{field: 'getFullName()', displayName: 'Name'},
+		//{field: 'getFullName()', displayName: 'Name'},
+			{ field: 'specialization', displayName : 'workordercategory'},
+			{ field: 'subject'},
 			{field: 'email'},
-			{field: 'mobile', displayName: 'Mobile 1'},
-			{field: 'alternateMobile', displayName: 'Mobile 2'},
-			{field: 'emergencyMobile', displayName: 'Mobile 3'},
+			{field: 'mobile', displayName: 'Mobile'},
+			{field: 'flatno', displayName: 'flatno'},
+			//{field: 'emergencyMobile', displayName: 'Mobile 3'},
 			{
 				field: 'createdAt',
 				enableSorting: true,
@@ -48,6 +51,9 @@ app.controller('FOSController', function ($scope, $http, $stateParams, $location
 	};
 
 	var refresh = function() {
+		$http.get('api/specializations').then(function(response){
+			$scope.specializations = response.data.data;
+		});
 		$http.get('/api/fos/all').success(function(response) {
 			$scope.fosList = response.data;
 			$scope.gridOptions.data = response.data;
@@ -55,6 +61,7 @@ app.controller('FOSController', function ($scope, $http, $stateParams, $location
 				row.getFullName = function(){
 					return this.firstName + ' ' + this.lastName;
 				}
+				//row.specializationId = row.specializationInfo.specialization
 			});
 		});
 
@@ -72,7 +79,7 @@ app.controller('FOSController', function ($scope, $http, $stateParams, $location
 
 	refresh();
 
-	$scope.createFOS = function() {
+	$scope.createFOS = function(fos) {
 		var fd = new FormData();
 		for (var key in $scope.fos) {
 			fd.append(key, $scope.fos[key])
@@ -83,7 +90,7 @@ app.controller('FOSController', function ($scope, $http, $stateParams, $location
 		}).then(function(response) {
 			if(response.data.success) {
 				$scope.showAlert = true;
-				$scope.alert = {status: "success", message: response.data.message}
+				$scope.alert = {status: "success", message: 'New ticket raised'}
 				$scope.fos = {}
 			}
 			else {
@@ -98,7 +105,7 @@ app.controller('FOSController', function ($scope, $http, $stateParams, $location
 		$http.post('/api/fos/update', $scope.fos).success(function(response) {
 			if(response.success) {
 				$scope.showAlert = true;
-				$scope.alert = { status: "success", message: response.message };
+				$scope.alert = { status: "success", message:'Assigned' };
 			}
 			else {
 				$scope.showAlert = false;

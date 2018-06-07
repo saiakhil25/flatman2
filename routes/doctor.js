@@ -2,7 +2,6 @@ var async = require('async');
 var _ 	= require('underscore');
 var Doctor = require('../models/doctor');
 var User = require('../models/user');
-var Specialization = require('../models/specialization');
 var crypto = require('../config/crypto');
 
 module.exports = function(router, upload) {
@@ -58,14 +57,14 @@ module.exports = function(router, upload) {
 					callback(null, data);
 				});
 			},
-			function(data, callback) {
-				Specialization.findById(data.basicInfo.specializationId, function(err, spec) {
-					if(err)
-						callback(err)
-					data["specialization"] = spec;
-					callback(null, data);
-				})
-			}
+			// function(data, callback) {
+			// 	Specialization.findById(data.basicInfo.specializationId, function(err, spec) {
+			// 		if(err)
+			// 			callback(err)
+			// 		data["specialization"] = spec;
+			// 		callback(null, data);
+			// 	})
+			// }
 		], function(err, data) {
 			if(err) {
 				res.json({success: true, error: err})
@@ -83,7 +82,7 @@ module.exports = function(router, upload) {
 				res.json({success: false, message: "File too large, maximum size 1 MB"});
 			}
 			else {
-				req.body.avatar = req.file.path;
+				//req.body.avatar = req.file.path;
 				User.findOne({email: req.body.email}, function(err, user) {
 					if(err) {
 						res.json({success: false, error: err.stack});
@@ -93,11 +92,13 @@ module.exports = function(router, upload) {
 					}
 					else {
 						var newUser = new User();
+						newUser.workordercategory = req.body.workordercategory;
+						newUser.subject = req.body.subject;
+						newUser.flatno =req.body.flatno;
 						newUser.email = req.body.email;
-						newUser.password = crypto.encrypt(req.body.password);
-						newUser.firstName = req.body.firstName;
-						newUser.lastName = req.body.lastName;
-						newUser.avatar = req.body.avatar;
+						//newUser.password = crypto.encrypt(req.body.password);
+						//newUser.lastName = req.body.lastName;
+						//newUser.avatar = req.body.avatar;
 						newUser.mobile = req.body.mobile;
 						newUser.userRole = 4;
 						newUser.status = 1;
@@ -142,17 +143,17 @@ module.exports = function(router, upload) {
 
 	function addDoctor(doctor, callback) {
 		var newDoctor = new Doctor();
-		newDoctor.firstName = doctor.firstName
-		newDoctor.lastName = doctor.lastName
-		newDoctor.avatar = doctor.avatar
-		newDoctor.specializationId = doctor.specializationId
-		newDoctor.officeAddress = doctor.officeAddress
-		newDoctor.residentialAddress = doctor.residentialAddress
+		newDoctor.workordercategory = doctor.workordercategory
+		//newDoctor.lastName = doctor.lastName
+		//newDoctor.avatar = doctor.avatar
+		//newDoctor.specializationId = doctor.specializationId
+		newDoctor.issues = doctor.issues
+		//newDoctor.residentialAddress = doctor.residentialAddress
 		newDoctor.mobile = doctor.mobile
-		newDoctor.alternateMobile = doctor.alternateMobile
+		newDoctor.flatno = doctor.flatno
 		newDoctor.email = doctor.email
-		newDoctor.password = doctor.password
-		newDoctor.graduationYear = doctor.graduationYear
+		//newDoctor.password = doctor.password
+		newDoctor.subject = doctor.subject
 		newDoctor.status = 1
 		newDoctor.save(function(err) {
 			if(err)

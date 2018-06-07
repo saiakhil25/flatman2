@@ -1,9 +1,10 @@
+
 <ol class="breadcrumb">
 	<li>
 		<a href="#">Home</a>
 	</li>
 	<li>
-		<a ui-sref="app.doctors">Doctors</a>
+		<a ui-sref="app.doctors">Raised tickets</a>
 	</li>
 	<li class="active" ng-hide="isUpdate"><b>Create</b></li>
 	<li class="active" ng-show="isUpdate">Update / {{doctor.firstName}}</li>
@@ -46,19 +47,25 @@
 		<div class="row">
 			<div class="col-md-6">
 				<div class="form-group">
-					<label for="field-1" class="control-label">First Name</label>
-					<input type="text" name="first_name" ng-model="doctor.firstName" class="form-control" id="field-1" placeholder="John">
+					<label for="field-1" class="control-label">workordercategory</label>
+					<input type="text" name="workordercategory" ng-model="doctor.workordercategory" class="form-control" id="field-1" placeholder="workordercategory">
 				</div>
 			</div>
-			<div class="col-md-6">
+			<!-- <div class="col-md-6">
 				<div class="form-group">
 					<label for="field-2" class="control-label">Last Name</label>
 					<input type="text" name="last_name" ng-model="doctor.lastName" class="form-control" id="field-2" placeholder="Doe">
 				</div>
+			</div> -->
+			<div class="col-md-6">
+				<div class="form-group">
+					<label for="field-17" class="control-label">subject</label>
+					<input type="text" name="subject" ng-model="doctor.subject" class="form-control" id="field-17" placeholder="subject">
+				</div>
 			</div>
 		</div>
 
-		<div class="row">
+		<!-- <div class="row">
 			<div class="col-md-12" ng-hide="isUpdate">
 				<div class="form-group">
 					<label for="doc-avatar" class="control-label">Doctor Image</label>
@@ -74,9 +81,9 @@
 			<div class="col-md-2" ng-show="isUpdate">
 				<button type="button" ng-click="uploadImage(doctor, 'doctor')" class="btn btn-primary">Upload</button>
 			</div>
-		</div>
+		</div> -->
 
-		<div class="row">
+		<!-- <div class="row">
 			<div class="col-md-12">
 				<div class="form-group">
 					<label for="field-8" class="control-label">Location</label>
@@ -86,25 +93,23 @@
 					</select>
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<div class="form-group">
 					<label for="field-6" class="control-label">Mobile</label>
 					<input type="text" name="mobile" ng-model="doctor.mobile" class="form-control" id="field-6" placeholder="Mobile">
 				</div>
 			</div>
-			<div class="col-md-6">
+			<div class="col-md-4">
 				<div class="form-group">
-					<label for="field-16" class="control-label">Alternate Mobile</label>
-					<input type="text" name="altermobile" ng-model="doctor.alternateMobile" class="form-control" id="field-16" placeholder="Alternate Mobile">
+					<label for="field-16" class="control-label">flatno</label>
+					<input type="text" name="flatno" ng-model="doctor.flatno" class="form-control" id="field-16" placeholder="flatno">
 				</div>
 			</div>
-		</div>
 
-		<div class="row">
-			<div class="col-md-12">
+			<div class="col-md-4">
 				<div class="form-group">
 					<label for="field-7" class="control-label">Email</label>
 					<input type="text" name="email" ng-model="doctor.email" class="form-control" id="field-7" placeholder="Email">
@@ -113,30 +118,30 @@
 		</div>
 
 		<div class="row">
-			<div class="col-md-6">
+			<div class="col-md-12">
 				<div class="form-group">
-					<label for="field-11" class="control-label">Office Address</label>
-					<textarea name="ofzaddress" id="field-11" class="form-control" rows="3" ng-model="doctor.officeAddress"></textarea>
+					<label for="field-11" class="control-label">issues</label>
+					<textarea name="issues" id="field-11" class="form-control" rows="3" ng-model="doctor.issues"></textarea>
 				</div>
 			</div>
-			<div class="col-md-6">
+			<!-- <div class="col-md-6">
 				<div class="form-group">
 					<label for="field-10" class="control-label">Residential Address</label>
 					<textarea name="resaddress" id="field-10" class="form-control" rows="3" ng-model="doctor.residentialAddress"></textarea>
 				</div>
-			</div>
+			</div> -->
 		</div>
 
-		<div class="row">
-			<div class="col-md-12">
+		<!-- <div class="row">
+			<div class="col-md-6">
 				<div class="form-group">
-					<label for="field-17" class="control-label">Graduation Year</label>
-					<input type="text" name="graduation" ng-model="doctor.graduationYear" class="form-control" id="field-17" placeholder="Graduation Year">
+					<label for="field-17" class="control-label">subject</label>
+					<input type="text" name="subject" ng-model="doctor.subject" class="form-control" id="field-17" placeholder="Graduation Year">
 				</div>
 			</div>
-		</div>
+		</div> -->
 
-		<div class="row" ng-hide="isUpdate">
+		<!-- <div class="row" ng-hide="isUpdate">
 			<div class="col-md-6">
 				<div class="form-group">
 					<label for="field-4" class="control-label">Password</label>
@@ -150,10 +155,10 @@
 					<input type="password" ng-model="doctor.confirmPassword" class="form-control" id="field-5" placeholder="Confirm password">
 				</div>
 			</div>
-		</div>
+		</div> -->
 
 		<div class="pull-right-sm" ng-hide="isUpdate">
-			<button type="button" class="btn btn-block btn-secondary" ng-click="createDoctor()">Create</button>
+			<button type="button" class="btn btn-block btn-secondary" ng-click="createDoctor(doctor)">Assign</button>
 		</div>
 
 	</div>

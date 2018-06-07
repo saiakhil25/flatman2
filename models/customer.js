@@ -5,6 +5,7 @@ var customerSchema = mongoose.Schema({
 	lastName		: 	{ type: String },
 	avatar			: 	{ type: String },
 	location		: 	{ type: String },
+	workordercategory :{type: String},
 	mobile			: 	{ type: String },
 	email			: 	{ type: String },
 	serviceLocation	:   { type: String },

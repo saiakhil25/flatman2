@@ -1,14 +1,14 @@
 <page-title
 	ng-if="layoutOptions.pageTitles"
-	title="FOS"
-	description="List of All Fos's">
+	title="Monitoring table"
+	description="List of issues">
 </page-title>
 
 <div class="row">
 	<div class="col-md-12">
-		<div class="action-buttons">
-			<a class="btn btn-success" ui-sref="app.fos-form" role="button">Add FOS</a>
-		</div>
+		<!-- <div class="action-buttons">
+			<a class="btn btn-success" ui-sref="app.fos-form" role="button">Rising issues</a>
+		</div> -->
 		<div ui-grid="gridOptions" ui-grid-pagination class="myGrid"></div>
 		<!-- <div class="panel panel-default">
 			<div class="panel-heading">
